@@ -1,0 +1,31 @@
+<div id="mainPage">
+  <ion-header [translucent]="true">
+    <ion-toolbar color="secondary" mode="md">
+      <ion-title></ion-title>
+      <ion-buttons slot="end">
+        <!-- Buttons to Home, Courses, Projects, and Contact -->
+        @for (item of buttons; track item){
+        <ion-button
+          mode="ios"
+          (click)="handleEvent($event, item.btnHandler)"
+          (touchstart)="handleEvent($event, item.btnHandler)"
+          [color]="item.title === getActiveButton() ? 'danger' : 'light'"
+          matTooltipPosition="below"
+          fill="clear"
+          shape="round"
+        >
+          <ion-icon
+            [color]="item.title === getActiveButton() ? 'danger' : 'light'"
+            [name]="item.icon"
+            slot="icon-only"
+            size="large"
+          ></ion-icon>
+        </ion-button>
+
+        }
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-router-outlet></ion-router-outlet>
+</div>

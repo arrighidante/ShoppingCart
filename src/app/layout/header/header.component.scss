@@ -1,0 +1,9 @@
+.active,
+.active:hover {
+    font-weight: bold;
+    color: var(--dark-blue);
+}
+ion-item,
+.menuContent {
+    --background: var(--ion-color-secondary) !important;
+}
