@@ -2,6 +2,20 @@
   <ion-card-header>
     <ion-card-subtitle>By {{ course.author }}</ion-card-subtitle>
     <ion-card-title>{{ course.courseName }}</ion-card-title>
+    <ion-text color="primary">
+      @if(cleanNumber(course.discountPercentage) > 0){
+      <div>
+        <h3>
+          <del>{{ course.actualPrice }}</del>
+        </h3>
+        <h3>
+          <strong> Only {{ prizeToShow }} </strong>
+        </h3>
+      </div>
+      }@else {
+      <h3>{{ course.actualPrice }}</h3>
+      }
+    </ion-text>
   </ion-card-header>
 
   <ion-button
