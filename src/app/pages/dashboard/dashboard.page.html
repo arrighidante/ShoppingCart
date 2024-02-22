@@ -19,8 +19,7 @@
     ></ion-grid
   >
 
-  
-    <!-- 
+  <!-- 
         <!-- ALL COURSES AND ALL PROJECTS BUTTONS 
             <ion-row class="ion-align-items-center ion-justify-content-center row-20">
                 <ion-col size-xs="12" size-sm="10" size-md="8" size-lg="8" class="ion-text-center">
@@ -73,7 +72,7 @@
 
 <!-- COURSES  
     @if(showCourses){ -->
-     
+
   <section id="courses">
     <ion-grid>
       <ion-row class="ion-align-items-baseline ion-justify-content-center">
@@ -101,45 +100,84 @@
             </h3>
           </ion-label>
         </ion-col>
+
+        <!-- NEXT & BACK BUTTONS -->
+        <ion-col size="12" class="ion-text-center">
+          <ion-button
+            (click)="previousPage()"
+            fill="clear"
+            shape="round"
+            color="light"
+          >
+            <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+            BACK
+          </ion-button>
+          <ion-button
+            (click)="nextPage()"
+            fill="clear"
+            shape="round"
+            color="light"
+          >
+            <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+            NEXT
+          </ion-button>
+        </ion-col>
       </ion-row>
+
+      <!-- SEARCH COURSES -->
+      <ion-row class="ion-justify-content-between">
+        <ion-col size="12" size-sm="12" size-md="4">
+          <ion-item>
+            <ion-input
+              [value]="searchTerm()"
+              (ionChange)="applyFilter($event)"
+              color="light"
+              label="Search"
+              labelPlacement="floating"
+              placeholder="By name, author or tags"
+            >
+            </ion-input>
+            <ion-button slot="end" color="light" (click)="searchTerm.set('')">
+              <ion-icon
+                slot="icon-only"
+                size="small"
+                name="refresh-outline"
+                color="primary"
+              ></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!-- COURSES AREA -->
       @defer (on viewport(coursesArea)) {
-        <div [ngTemplateOutlet]="coursesAreaContent"></div>
-    
-        } @placeholder { }
+      <div [ngTemplateOutlet]="coursesAreaContent"></div>
+
+      } @placeholder { }
       <div #coursesArea>
         <ng-template #coursesAreaContent>
-          <ion-row
-           
-            class="ion-justify-content-center"
-          >
+          <ion-row class="ion-justify-content-center">
             @for (course of coursesToShow(); track course){
-            <ion-col
-              size="12"
-              size-sm="6"
-              size-md="5"
-              size-lg="3"
-              size-xl="3"
-            >
-              <app-course-card [course]="course" ></app-course-card>
+            <ion-col size="12" size-sm="6" size-md="5" size-lg="3" size-xl="3">
+              <app-course-card [course]="course"></app-course-card>
             </ion-col>
             }
-            <ion-button
-              class="ion-align-self-center"
-              [routerLink]="['/courses']"
-              fill="outline"
-              mode="ios"
-              color="danger"
-              shape="round"
-            >
-              Go to courses
-            </ion-button>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" class="ion-text-center">
+              <ion-button
+                class="ion-align-self-center"
+                [routerLink]="['/courses']"
+                fill="outline"
+                mode="ios"
+                color="danger"
+                shape="round"
+              >
+                Go to courses
+              </ion-button>
+            </ion-col>
           </ion-row>
         </ng-template>
       </div>
-  
-    
-
     </ion-grid>
-
   </section>
 </ion-content>

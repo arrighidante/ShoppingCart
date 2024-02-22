@@ -4,6 +4,12 @@ import { RouterModule } from '@angular/router';
 import { Course } from '@interfaces/course.interface';
 import { IonicModule } from '@ionic/angular';
 import { CourseCardComponent } from '@shared/components/course-card/course-card.component';
+import { addIcons } from 'ionicons';
+import {
+  chevronBackOutline,
+  chevronForwardOutline,
+  refreshOutline,
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +19,9 @@ import { CourseCardComponent } from '@shared/components/course-card/course-card.
   imports: [RouterModule, CommonModule, IonicModule, CourseCardComponent],
 })
 export class DashboardPage {
+  currentPageIndex = signal(0);
   desiredQty = signal(4);
+  searchTerm = signal('');
   courses = signal<Course[]>([
     {
       courseName: 'Advanced Machine Learning',
@@ -150,8 +158,48 @@ export class DashboardPage {
     },
   ]);
 
-  coursesToShow = computed(() => {
-    const selectedCourses = this.courses().slice(0, this.desiredQty());
-    return selectedCourses;
+  constructor() {
+    addIcons({ chevronBackOutline, chevronForwardOutline, refreshOutline });
+  }
+
+  filteredCourses = computed(() => {
+    const lowerCasedSearchTerm = this.searchTerm().toLowerCase();
+
+    return this.courses().filter(
+      (course) =>
+        course.courseName.toLowerCase().includes(lowerCasedSearchTerm) ||
+        course.author.toLowerCase().includes(lowerCasedSearchTerm) ||
+        course.tags.some((tag) =>
+          tag.toLowerCase().includes(lowerCasedSearchTerm)
+        )
+    );
   });
+
+  coursesToShow = computed(() => {
+    const start = this.currentPageIndex() * this.desiredQty();
+    const end = start + this.desiredQty();
+    const filteredCourses = this.filteredCourses();
+
+    return filteredCourses.slice(start, end);
+  });
+
+  nextPage() {
+    const nextPageIndex = this.currentPageIndex() + 1;
+    const nextCoursesStartIndex = nextPageIndex * this.desiredQty();
+
+    if (nextCoursesStartIndex < this.filteredCourses().length) {
+      this.currentPageIndex.set(nextPageIndex);
+    }
+  }
+
+  previousPage() {
+    this.currentPageIndex() > 0
+      ? this.currentPageIndex.update((prev) => prev - 1)
+      : 0;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.searchTerm.set(filterValue);
+  }
 }
