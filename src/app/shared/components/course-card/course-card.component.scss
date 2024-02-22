@@ -1,0 +1,13 @@
+ion-card {
+  display: flex;
+  flex-direction: column;
+  touch-action: auto !important;
+
+  ion-icon {
+    margin: 10px;
+  }
+
+  ion-button {
+    touch-action: auto !important;
+  }
+}

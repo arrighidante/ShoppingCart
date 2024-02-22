@@ -1,0 +1,31 @@
+<ion-card color="light">
+  <ion-card-header>
+    <ion-card-subtitle>By {{ course.author }}</ion-card-subtitle>
+    <ion-card-title>{{ course.courseName }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-button
+    (click)="goToCourse()"
+    fill="outline"
+    color="primary"
+    size="small"
+  >
+    <ion-icon color="primary" slot="start" name="arrow-redo-outline"></ion-icon>
+    More info
+  </ion-button>
+  <ion-button fill="outline" color="primary" size="small">
+    <ion-icon color="warning" slot="start" name="star-outline"></ion-icon>
+    Add to wishlist
+  </ion-button>
+  <ion-button fill="solid" color="primary" size="small">
+    <ion-icon color="light" slot="start" name="cart-outline"></ion-icon>
+    Add to cart
+  </ion-button>
+  <ion-card-content>
+    @if(course.tags.length > 0){ @for(tag of course.tags; track tag){
+    <ion-chip color="dark">
+      <ion-label>{{ tag }}</ion-label>
+    </ion-chip>
+    } }
+  </ion-card-content>
+</ion-card>
