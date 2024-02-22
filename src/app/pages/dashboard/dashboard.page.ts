@@ -1,160 +1,160 @@
-import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { Course } from '@interfaces/course.interface';
-import { IonicModule } from '@ionic/angular';
-import { CourseCardComponent } from '@shared/components/course-card/course-card.component';
-import { addIcons } from 'ionicons';
-import {
-  chevronBackOutline,
-  chevronForwardOutline,
-  refreshOutline,
-} from 'ionicons/icons';
+import { CommonModule } from "@angular/common";
+import { Component, computed, signal } from "@angular/core";
+import { RouterModule } from "@angular/router";
+import { Course } from "@interfaces/course.interface";
+import { IonicModule } from "@ionic/angular";
+import { CourseCardComponent } from "@shared/components/course-card/course-card.component";
+import { addIcons } from "ionicons";
+import { chevronBackOutline, chevronForwardOutline, refreshOutline } from "ionicons/icons";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'dashboard.page.html',
-  styleUrls: ['dashboard.page.scss'],
+  selector: "app-home",
+  templateUrl: "dashboard.page.html",
+  styleUrls: ["dashboard.page.scss"],
   standalone: true,
   imports: [RouterModule, CommonModule, IonicModule, CourseCardComponent],
 })
 export class DashboardPage {
+  SORTING_OPTIONS = [
+    { label: "Price: Low to High", value: "lowFirst" },
+    { label: "Price: High to Low", value: "highFirst" },
+  ];
   currentPageIndex = signal(0);
   desiredQty = signal(4);
-  searchTerm = signal('');
+  searchTerm = signal("");
   courses = signal<Course[]>([
     {
-      courseName: 'Advanced Machine Learning',
-      author: 'Alex Johnson',
-      actualPrice: '₹1199',
-      discountPercentage: '15%',
-      tags: ['Machine Learning', 'Python'],
+      courseName: "Advanced Machine Learning",
+      author: "Alex Johnson",
+      actualPrice: "₹1199",
+      discountPercentage: "15%",
+      tags: ["Machine Learning", "Python"],
     },
     {
-      courseName: 'JavaScript Frameworks Masterclass',
-      author: 'Emily White',
-      actualPrice: '₹899',
-      discountPercentage: '20%',
-      tags: ['JavaScript', 'React', 'Vue'],
+      courseName: "JavaScript Frameworks Masterclass",
+      author: "Emily White",
+      actualPrice: "₹899",
+      discountPercentage: "20%",
+      tags: ["JavaScript", "React", "Vue"],
     },
     {
-      courseName: 'Full Stack Development with Django',
-      author: 'Chris Turner',
-      actualPrice: '₹1499',
-      discountPercentage: '10%',
-      tags: ['Python', 'Django', 'JavaScript'],
+      courseName: "Full Stack Development with Django",
+      author: "Chris Turner",
+      actualPrice: "₹1499",
+      discountPercentage: "10%",
+      tags: ["Python", "Django", "JavaScript"],
     },
     {
-      courseName: 'Cybersecurity Essentials',
-      author: 'Sophia Davis',
-      actualPrice: '₹1299',
-      discountPercentage: '25%',
-      tags: ['Cybersecurity', 'Network Security'],
+      courseName: "Cybersecurity Essentials",
+      author: "Sophia Davis",
+      actualPrice: "₹1299",
+      discountPercentage: "25%",
+      tags: ["Cybersecurity", "Network Security"],
     },
     {
-      courseName: 'Mobile App UX Design',
-      author: 'Daniel Smith',
-      actualPrice: '₹999',
-      discountPercentage: '18%',
-      tags: ['UX Design', 'Mobile App Development'],
+      courseName: "Mobile App UX Design",
+      author: "Daniel Smith",
+      actualPrice: "₹999",
+      discountPercentage: "18%",
+      tags: ["UX Design", "Mobile App Development"],
     },
     {
-      courseName: 'Node.js for Beginners',
-      author: 'Ava Williams',
-      actualPrice: '₹699',
-      discountPercentage: '22%',
-      tags: ['Node.js', 'JavaScript'],
+      courseName: "Node.js for Beginners",
+      author: "Ava Williams",
+      actualPrice: "₹699",
+      discountPercentage: "22%",
+      tags: ["Node.js", "JavaScript"],
     },
     {
-      courseName: 'Artificial Intelligence in Business',
-      author: 'Noah Turner',
-      actualPrice: '₹1599',
-      discountPercentage: '12%',
-      tags: ['Artificial Intelligence', 'Business'],
+      courseName: "Artificial Intelligence in Business",
+      author: "Noah Turner",
+      actualPrice: "₹1599",
+      discountPercentage: "12%",
+      tags: ["Artificial Intelligence", "Business"],
     },
     {
-      courseName: 'Swift Programming for iOS',
-      author: 'Emma Johnson',
-      actualPrice: '₹1099',
-      discountPercentage: '17%',
-      tags: ['iOS', 'Swift'],
+      courseName: "Swift Programming for iOS",
+      author: "Emma Johnson",
+      actualPrice: "₹1099",
+      discountPercentage: "17%",
+      tags: ["iOS", "Swift"],
     },
     {
-      courseName: 'Responsive Web Design Principles',
-      author: 'Liam White',
-      actualPrice: '₹799',
-      discountPercentage: '21%',
-      tags: ['Web Design', 'HTML', 'CSS'],
+      courseName: "Responsive Web Design Principles",
+      author: "Liam White",
+      actualPrice: "₹799",
+      discountPercentage: "21%",
+      tags: ["Web Design", "HTML", "CSS"],
     },
     {
-      courseName: 'Java Fundamentals',
-      author: 'Olivia Turner',
-      actualPrice: '₹899',
-      discountPercentage: '0',
-      tags: ['Java'],
+      courseName: "Java Fundamentals",
+      author: "Olivia Turner",
+      actualPrice: "₹899",
+      discountPercentage: "0",
+      tags: ["Java"],
     },
     {
-      courseName: 'Game Development with Unity',
-      author: 'Lucas Davis',
-      actualPrice: '₹1399',
-      discountPercentage: '14%',
-      tags: ['Game Development', 'Unity'],
+      courseName: "Game Development with Unity",
+      author: "Lucas Davis",
+      actualPrice: "₹1399",
+      discountPercentage: "14%",
+      tags: ["Game Development", "Unity"],
     },
     {
-      courseName: 'Python for Data Science',
-      author: 'Aria Smith',
-      actualPrice: '₹1199',
-      discountPercentage: '0',
-      tags: ['Python', 'Data Science'],
+      courseName: "Python for Data Science",
+      author: "Aria Smith",
+      actualPrice: "₹1199",
+      discountPercentage: "0",
+      tags: ["Python", "Data Science"],
     },
     {
-      courseName: 'Frontend Development Bootcamp',
-      author: 'Mia Johnson',
-      actualPrice: '₹999',
-      discountPercentage: '18%',
-      tags: ['HTML', 'CSS', 'JavaScript'],
+      courseName: "Frontend Development Bootcamp",
+      author: "Mia Johnson",
+      actualPrice: "₹999",
+      discountPercentage: "18%",
+      tags: ["HTML", "CSS", "JavaScript"],
     },
     {
-      courseName: 'C# Programming Mastery',
-      author: 'Jackson White',
-      actualPrice: '₹1099',
-      discountPercentage: '0',
-      tags: ['C#'],
+      courseName: "C# Programming Mastery",
+      author: "Jackson White",
+      actualPrice: "₹1099",
+      discountPercentage: "0",
+      tags: ["C#"],
     },
     {
-      courseName: 'Angular Framework Deep Dive',
-      author: 'Ava Turner',
-      actualPrice: '₹1299',
-      discountPercentage: '15%',
-      tags: ['Angular'],
+      courseName: "Angular Framework Deep Dive",
+      author: "Ava Turner",
+      actualPrice: "₹1299",
+      discountPercentage: "15%",
+      tags: ["Angular"],
     },
     {
-      courseName: 'Data Visualization with D3.js',
-      author: 'Ethan Davis',
-      actualPrice: '₹899',
-      discountPercentage: '0',
-      tags: ['Data Visualization', 'D3.js'],
+      courseName: "Data Visualization with D3.js",
+      author: "Ethan Davis",
+      actualPrice: "₹899",
+      discountPercentage: "0",
+      tags: ["Data Visualization", "D3.js"],
     },
     {
-      courseName: 'Android App Development Basics',
-      author: 'Isabella Smith',
-      actualPrice: '₹799',
-      discountPercentage: '0',
-      tags: ['Android', 'Mobile App Development'],
+      courseName: "Android App Development Basics",
+      author: "Isabella Smith",
+      actualPrice: "₹799",
+      discountPercentage: "0",
+      tags: ["Android", "Mobile App Development"],
     },
     {
-      courseName: 'Vue.js for Frontend Development',
-      author: 'Logan Johnson',
-      actualPrice: '₹999',
-      discountPercentage: '18%',
-      tags: ['Vue.js', 'JavaScript'],
+      courseName: "Vue.js for Frontend Development",
+      author: "Logan Johnson",
+      actualPrice: "₹999",
+      discountPercentage: "18%",
+      tags: ["Vue.js", "JavaScript"],
     },
     {
-      courseName: 'Cloud Computing Fundamentals',
-      author: 'Sophie Turner',
-      actualPrice: '₹1199',
-      discountPercentage: '16%',
-      tags: ['Cloud Computing'],
+      courseName: "Cloud Computing Fundamentals",
+      author: "Sophie Turner",
+      actualPrice: "₹1199",
+      discountPercentage: "16%",
+      tags: ["Cloud Computing"],
     },
   ]);
 
@@ -169,9 +169,7 @@ export class DashboardPage {
       (course) =>
         course.courseName.toLowerCase().includes(lowerCasedSearchTerm) ||
         course.author.toLowerCase().includes(lowerCasedSearchTerm) ||
-        course.tags.some((tag) =>
-          tag.toLowerCase().includes(lowerCasedSearchTerm)
-        )
+        course.tags.some((tag) => tag.toLowerCase().includes(lowerCasedSearchTerm))
     );
   });
 
@@ -192,15 +190,8 @@ export class DashboardPage {
     }
   }
 
-  desiredQtyChanged(event: Event) {
-    const selectedQty = Number((event.target as HTMLInputElement).value);
-    this.desiredQty.set(selectedQty);
-  }
-
   previousPage() {
-    this.currentPageIndex() > 0
-      ? this.currentPageIndex.update((prev) => prev - 1)
-      : 0;
+    this.currentPageIndex() > 0 ? this.currentPageIndex.update((prev) => prev - 1) : 0;
   }
 
   applyFilter(event: Event) {
@@ -208,8 +199,19 @@ export class DashboardPage {
     this.searchTerm.set(filterValue);
   }
 
+  handleSortChanged(event: Event) {
+    const selectedSort = (event.target as HTMLSelectElement).value;
+    // Selected sort value should be one of the 2 options in the SORTING_OPTIONS array. When I select an option,
+    // It should sort coursesToShow() according to the selected option.
+  }
+
+  desiredQtyChanged(event: Event) {
+    const selectedQty = Number((event.target as HTMLInputElement).value);
+    this.desiredQty.set(selectedQty);
+  }
+
   resetSearch() {
-    this.searchTerm.set('');
+    this.searchTerm.set("");
     this.desiredQty.set(4);
   }
 }

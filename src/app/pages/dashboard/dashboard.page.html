@@ -1,39 +1,22 @@
 <ion-content [fullscreen]="true">
   <ion-grid>
-    <ion-row
-      class="ion-align-items-baseline ion-justify-content-center ion-margin-top"
-    >
-      <ion-col
-        size-xs="10"
-        size-sm="10"
-        size-md="10"
-        size-lg="10"
-        class="ion-margin-top"
-      >
+    <ion-row class="ion-align-items-baseline ion-justify-content-center ion-margin-top">
+      <ion-col size-xs="10" size-sm="10" size-md="10" size-lg="10" class="ion-margin-top">
         <ion-avatar class="photo ion-margin-vertical">
           <img src="./../../../assets/img/angular17.png" />
         </ion-avatar>
         <div class="banner">
           <h1>Discover Latest Courses on Angular</h1>
-          <ion-text color="medium" class="ion-margin-top">
-            Join us and follow your desired learning path with our professional
-            training
-          </ion-text>
+          <ion-text color="medium" class="ion-margin-top"> Join us and follow your desired learning path with our professional training </ion-text>
         </div>
-      </ion-col></ion-row
-    ></ion-grid
-  >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <section id="courses">
     <ion-grid>
       <ion-row class="ion-align-items-baseline ion-justify-content-center">
-        <ion-col
-          size-xs="10"
-          size-sm="10"
-          size-md="10"
-          size-lg="10"
-          class="ion-margin-vertical"
-        >
+        <ion-col size-xs="10" size-sm="10" size-md="10" size-lg="10" class="ion-margin-vertical">
           <ion-label color="danger">
             <h4 class="h4">Start learning today</h4>
           </ion-label>
@@ -42,33 +25,20 @@
           </ion-label>
           <ion-label color="light">
             <h3>
-              Welcome to our state-of-art courses. Based on latest technologies
-              and always up to date, here we showcased a selection of our
-              courses. This space is dynamic and we'll regularly updated to make
-              them available for you. Your learning journey and skill
-              enhancements opportunity is here. Stay tuned for the latest
-              updates!
+              Welcome to our state-of-art courses. Based on latest technologies and always up to date, here we showcased a selection of our courses. This space
+              is dynamic and we'll regularly updated to make them available for you. Your learning journey and skill enhancements opportunity is here. Stay
+              tuned for the latest updates!
             </h3>
           </ion-label>
         </ion-col>
 
         <!-- NEXT & BACK BUTTONS -->
         <ion-col size="12" class="ion-text-center">
-          <ion-button
-            (click)="previousPage()"
-            fill="clear"
-            shape="round"
-            color="light"
-          >
+          <ion-button (click)="previousPage()" fill="clear" shape="round" color="light">
             <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
             BACK
           </ion-button>
-          <ion-button
-            (click)="nextPage()"
-            fill="clear"
-            shape="round"
-            color="light"
-          >
+          <ion-button (click)="nextPage()" fill="clear" shape="round" color="light">
             <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
             NEXT
           </ion-button>
@@ -76,7 +46,7 @@
       </ion-row>
 
       <!-- SEARCH & QTY SELECT FOR COURSES -->
-      <ion-row class="ion-justify-content-between">
+      <ion-row class="ion-align-items-center ion-justify-content-center row-auto">
         <ion-col size="12" size-sm="12" size-md="4">
           <ion-item>
             <ion-input
@@ -89,13 +59,17 @@
             >
             </ion-input>
             <ion-button slot="end" color="light" (click)="resetSearch()">
-              <ion-icon
-                slot="icon-only"
-                size="small"
-                name="refresh-outline"
-                color="primary"
-              ></ion-icon>
+              <ion-icon slot="icon-only" size="small" name="refresh-outline" color="primary"></ion-icon>
             </ion-button>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" size-sm="12" size-md="3">
+          <ion-item>
+            <ion-select (ionChange)="handleSortChanged($event)" aria-label="Sort" interface="popover" placeholder="Sort by price">
+              @for(sortOption of SORTING_OPTIONS; track sortOption){
+              <ion-select-option [value]="sortOption.value">{{sortOption.label}}</ion-select-option>
+              }
+            </ion-select>
           </ion-item>
         </ion-col>
         <ion-col size="12" size-sm="12" size-md="2">
@@ -103,13 +77,18 @@
             <ion-input
               [value]="desiredQty()"
               (ionChange)="desiredQtyChanged($event)"
-              label="Results: "
+              label="Show: "
               type="number"
               placeholder="4"
               min="1"
               [max]="filteredCourses().length"
             ></ion-input>
           </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center ion-justify-content-center row-auto">
+        <ion-col size="6" class="ion-text-center">
+          <ion-note>Showing {{desiredQty()}} courses of {{ filteredCourses().length}}</ion-note>
         </ion-col>
       </ion-row>
 
@@ -128,14 +107,7 @@
           </ion-row>
           <ion-row>
             <ion-col size="12" class="ion-text-center">
-              <ion-button
-                class="ion-align-self-center"
-                [routerLink]="['/courses']"
-                fill="outline"
-                mode="ios"
-                color="danger"
-                shape="round"
-              >
+              <ion-button class="ion-align-self-center" [routerLink]="['/courses']" fill="outline" mode="ios" color="danger" shape="round">
                 Go to courses
               </ion-button>
             </ion-col>
