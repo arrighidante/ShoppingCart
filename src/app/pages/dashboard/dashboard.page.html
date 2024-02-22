@@ -19,60 +19,6 @@
     ></ion-grid
   >
 
-  <!-- 
-        <!-- ALL COURSES AND ALL PROJECTS BUTTONS 
-            <ion-row class="ion-align-items-center ion-justify-content-center row-20">
-                <ion-col size-xs="12" size-sm="10" size-md="8" size-lg="8" class="ion-text-center">
-                    <ion-col size-xs="6" size-sm="6" size-md="6" size-lg="3" class="ion-margin-top ion-text-center">
-                        <ion-button
-                        class="ion-align-self-center"
-                        [routerLink]="['/portfolio/courses']"
-                        fill="outline"
-                        mode="ios"
-                        color="danger"
-                        shape="round">
-                        All courses
-                    </ion-button>
-                </ion-col>
-                <ion-col size-xs="6" size-sm="6" size-md="6" size-lg="3" class="ion-margin-top ion-text-center">
-                    <ion-button
-                    class="ion-align-self-center"
-                    [routerLink]="['/portfolio/projects']"
-                    fill="outline"
-                    mode="ios"
-                    color="danger"
-                    shape="round">
-                    All projects
-                </ion-button>
-            </ion-col>
-        </ion-col>
-    </ion-row>
-    
-    <!-- TAB BUTTONS 
-        <ion-col size-xs="10" size-sm="12" size-md="12" size-lg="6" class="ion-text-center">
-            <ion-segment (ionChange)="selectedTabChanged($event)" color="danger" value="courses" mode="md">
-                <ion-segment-button
-                value="courses"
-                matTooltip="Some favorite courses"
-                matTooltipPosition="above"
-                matTooltipShowDelay="700">
-                <ion-icon name="grid-outline"></ion-icon>
-                <ion-label>Courses</ion-label>
-            </ion-segment-button>
-            <ion-segment-button
-            value="projects"
-            matTooltip="Some favorite projects"
-            matTooltipPosition="above"
-            matTooltipShowDelay="700">
-            <ion-icon name="apps-outline"></ion-icon>
-            <ion-label>Projects</ion-label>
-        </ion-segment-button>
-    </ion-segment>
-</ion-col>
-
-<!-- COURSES  
-    @if(showCourses){ -->
-
   <section id="courses">
     <ion-grid>
       <ion-row class="ion-align-items-baseline ion-justify-content-center">
@@ -124,7 +70,7 @@
         </ion-col>
       </ion-row>
 
-      <!-- SEARCH COURSES -->
+      <!-- SEARCH & QTY SELECT FOR COURSES -->
       <ion-row class="ion-justify-content-between">
         <ion-col size="12" size-sm="12" size-md="4">
           <ion-item>
@@ -137,7 +83,7 @@
               placeholder="By name, author or tags"
             >
             </ion-input>
-            <ion-button slot="end" color="light" (click)="searchTerm.set('')">
+            <ion-button slot="end" color="light" (click)="resetSearch()">
               <ion-icon
                 slot="icon-only"
                 size="small"
@@ -147,11 +93,24 @@
             </ion-button>
           </ion-item>
         </ion-col>
+        <ion-col size="12" size-sm="12" size-md="2">
+          <ion-item>
+            <ion-input
+              [value]="desiredQty()"
+              (ionChange)="desiredQtyChanged($event)"
+              label="Results: "
+              type="number"
+              placeholder="4"
+              min="1"
+              [max]="filteredCourses().length"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
       </ion-row>
+
       <!-- COURSES AREA -->
       @defer (on viewport(coursesArea)) {
       <div [ngTemplateOutlet]="coursesAreaContent"></div>
-
       } @placeholder { }
       <div #coursesArea>
         <ng-template #coursesAreaContent>

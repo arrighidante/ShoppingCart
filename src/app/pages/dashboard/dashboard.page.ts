@@ -192,6 +192,11 @@ export class DashboardPage {
     }
   }
 
+  desiredQtyChanged(event: Event) {
+    const selectedQty = Number((event.target as HTMLInputElement).value);
+    this.desiredQty.set(selectedQty);
+  }
+
   previousPage() {
     this.currentPageIndex() > 0
       ? this.currentPageIndex.update((prev) => prev - 1)
@@ -201,5 +206,10 @@ export class DashboardPage {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.searchTerm.set(filterValue);
+  }
+
+  resetSearch() {
+    this.searchTerm.set('');
+    this.desiredQty.set(4);
   }
 }
